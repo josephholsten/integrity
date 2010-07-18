@@ -25,6 +25,7 @@ task :db do
   require "init"
   DataMapper.auto_upgrade!
 end
+CLOBBER.include("integrity.db")
 
 desc "Clean-up build directory"
 task :cleanup do
@@ -78,3 +79,25 @@ file "public/integrity.css" => "views/integrity.sass" do |f|
 end
 
 CLOBBER.include("doc/integrity.html")
+
+namespace :bundle do
+  task :install do
+    sh 'bundle install'
+  end
+  CLOBBER.include(".bundle")
+  task :lock => :install do
+    sh 'bundle lock'
+  end
+  CLOBBER.include("Gemfile.lock")
+end
+
+desc 'create a place for builds'
+directory 'builds' do
+  mkdir 'builds'
+end
+CLOBBER.include("builds")
+
+desc "setup everything to run integrity"
+task :bootstrap => ['bundle:lock', :db, 'builds']
+
+CLOBBER.include("integrity.log")
