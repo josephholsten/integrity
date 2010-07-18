@@ -22,6 +22,10 @@ gem "sinatra-authorization", "1.0.0"
 gem "bcat", "~>0.5"
 gem "rack", "1.1.0"
 
+# Required to deploy on Heroku
+gem "do_postgres", "0.10.2"
+gem "dm-postgres-adapter"
+
 # These are dependencies for the various notifiers. Uncomment as appropriate.
 # = Email
 # gem "sinatra-ditties"
@@ -41,7 +45,7 @@ gem "rack", "1.1.0"
 # gem "resque"
 
 # Uncomment if you're using pg or mysql instead of sqlite
-# gem "pg"
+gem "pg"
 # gem "mysql"
 
 # = Development dependencies.
