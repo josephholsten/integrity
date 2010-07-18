@@ -1,13 +1,6 @@
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), "lib"))
 
-begin
-  require File.expand_path("../.bundle/environment", __FILE__)
-rescue LoadError
-  require "rubygems"
-  require "bundler"
-  Bundler.setup
-end
-
+require File.expand_path("../.bundle/environment", __FILE__)
 require "integrity"
 
 # Uncomment as appropriate for the notifier you want to use
